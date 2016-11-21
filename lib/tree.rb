@@ -32,6 +32,43 @@ def build_tree(values)
   root
 end
 
+
+def breadth(queue, target_value)
+  return nil if queue.empty?
+  
+  node = queue[0]
+  
+  return node if (target_value == node.value)
+    
+    
+  queue << node.left if (!node.left.nil?)
+  queue << node.right if (!node.right.nil?)
+  
+  queue.shift
+  
+  breadth(queue, target_value)
+end
+  
+def breadth_first_search(root, target_value)
+  breadth([root], target_value)
+end
+  
+def depth_first_search(root, target_value)
+  stack = []
+  stack << root
+
+  while !stack.empty? do
+    node = stack.pop   
+
+    return node  if (node.value == target_value)
+    
+    stack << node.left if (!node.left.nil?)
+    stack << node.right if (!node.right.nil?)
+  end
+end
+  
+  
+
       
   
 
