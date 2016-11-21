@@ -37,4 +37,14 @@ class TestNAME < Test::Unit::TestCase
     end
   end
     
+  def test_dfs
+    arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+    
+    tree = build_tree arr
+    
+    arr.each do |v|
+      assert_equal(v, dfs(tree, v).value)
+    end
+  end    
+    
 end

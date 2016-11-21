@@ -60,13 +60,25 @@ def depth_first_search(root, target_value)
   while !stack.empty? do
     node = stack.pop   
 
-    return node  if (node.value == target_value)
+    return node if (node.value == target_value)
     
     stack << node.left if (!node.left.nil?)
     stack << node.right if (!node.right.nil?)
   end
 end
-  
+
+def dfs(node, target_value)
+  return nil if node.nil?
+  return node if (node.value == target_value)
+
+  r = dfs(node.left, target_value)
+  if (!r.nil?)
+    return r
+  else
+    return dfs(node.right, target_value)
+  end
+end
+
   
 
       
