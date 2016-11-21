@@ -2,7 +2,7 @@ require 'node'
 
 # Returns the root node of a binary tree created from the array of values supplied
 def build_tree(values, parent = nil)
-  return nil if values.nil?
+  return nil if values.nil? || values.empty?
   
   value_count = values.length
   if value_count == 1
