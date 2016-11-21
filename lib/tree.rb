@@ -1,26 +1,37 @@
 require 'node'
 
 # Returns the root node of a binary tree created from the array of values supplied
-def build_tree(values, parent = nil)
-  return nil if values.nil? || values.empty?
+def build_tree(values)
   
-  value_count = values.length
-  if value_count == 1
-    result = Node.new values[0]
-  else
-    # If we don't have a least 2 values, the uses of #splice
-    # below can give us unwanted results.
-    
-    mid = value_count / 2
-    result = Node.new values[mid]
+  root = Node.new values[0]
   
-    result.left = build_tree(values[0..(mid - 1)], result)
-    result.right = build_tree(values[(mid + 1)..-1], result)
+  values[1..-1].each do |value|
+    new_node = Node.new value
+        
+    node = root
+    loop do       
+      if (value < node.value)
+        if (node.left.nil?)
+          node.left = new_node
+          new_node.parent = node
+          break
+        else
+          node = node.left
+        end
+      else
+        if (node.right.nil?)
+          node.right = new_node
+          new_node.parent = node
+          break
+        else
+          node = node.right
+        end
+      end
+    end
   end
-    
-  if !parent.nil?
-    result.parent = parent
-  end
-      
-  result
+  root
 end
+
+      
+  
+
